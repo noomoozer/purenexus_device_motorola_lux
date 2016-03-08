@@ -14,11 +14,23 @@
 # limitations under the License.
 #
 
+# Get the long list of APNs
+PRODUCT_COPY_FILES := device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+
+PRODUCT_NAME := full_lux
+PRODUCT_DEVICE := lux
+PRODUCT_BRAND := Android
+PRODUCT_MODEL := Moto X Play
+PRODUCT_MANUFACTURER := motorola
+
 # Inherit from lux device
 $(call inherit-product, device/motorola/lux/device.mk)
+$(call inherit-product-if-exists, vendor/motorola/lux/lux-vendor.mk)
 
-# Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := lux
 PRODUCT_NAME := full_lux
 
-$(call inherit-product-if-exists, vendor/motorola/lux/lux-vendor.mk)
+PRODUCT_PACKAGES += \
+    Launcher3
